@@ -1,0 +1,16 @@
+<a href="/serial_download/">Download serialized object</a>
+
+<p> Download the above serialized object copy and paste it back and submit it. The secure version will check for tempering.</p>
+
+<form action="/serial_upload/" enctype="multipart/form-data" method="post">
+
+    {% csrf_token %}
+
+    <input type="text" name="input">
+
+    <input type="submit" value="submit the serialized object back.">
+</form>
+
+<p>
+    {{ result }}
+</p>

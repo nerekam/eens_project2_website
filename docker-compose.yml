@@ -1,0 +1,59 @@
+version: '3'
+
+services:
+  db:
+    container_name: postgres-container
+    image: postgres
+    restart: always
+    volumes:
+      - ./data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - '5432:5432'
+
+  web:
+    container_name: web-container
+    build: ./web
+    restart: always
+    #command: bash  # Run bash with: docker-compose run --rm web
+    # Start bash in existing container with: docker-compose exec web bash
+    # command: python manage.py runserver 0.0.0.0:8000  # Start dev server
+    command: uwsgi --ini uwsgi.ini # Start uWSGI for Ngnix server
+    volumes:
+      - ./web:/code
+    ports:
+      - '8000:8000'
+    depends_on:
+      - db
+
+  web-insecure:
+    container_name: web-insecure-container
+    build: ./web-insecure
+    restart: always
+    #command: bash  # Run bash with: docker-compose run --rm web-insecure
+    # Start bash in existing container with: docker-compose exec web-insecure bash
+    # command: python manage.py runserver 0.0.0.0:8001  # Start dev server
+    command: uwsgi --ini uwsgi.ini # Start uWSGI for Ngnix server
+    volumes:
+      - ./web-insecure:/code
+    ports:
+      - '8001:8001'
+
+  nginx:
+    container_name: nginx-container
+    build: ./nginx
+    restart: always
+    ports:
+      - '80:80'
+      - '800:800'
+      - '443:443'
+    volumes:
+      - ./web:/code
+      - ./web-insecure:/code-insecure
+      - ./log:/var/log/nginx
+      - ./certs:/certs
+    depends_on:
+      - web

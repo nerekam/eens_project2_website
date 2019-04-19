@@ -1,0 +1,54 @@
+[
+  {
+    "model": "polls.question",
+    "pk": 1,
+    "fields": {
+      "question_text": "What is up?",
+      "pub_date": "2019-04-10T00:00:00+00:00"
+    }
+  },
+  {
+    "model": "polls.Choice",
+    "pk": 1,
+    "fields": {
+      "question": 1,
+      "choice_text": "The sky",
+      "votes": 1
+    }
+  },
+  {
+    "model": "polls.Choice",
+    "pk": 2,
+    "fields": {
+      "question": 1,
+      "choice_text": "Nothing",
+      "votes": 0
+    }
+  },
+    {
+    "model": "polls.question",
+    "pk": 2,
+    "fields": {
+      "question_text": "What is the best course to take in NCKU?",
+      "pub_date": "2019-04-16T10:30:00+00:00"
+    }
+  },
+  {
+    "model": "polls.Choice",
+    "pk": 3,
+    "fields": {
+      "question": 2,
+      "choice_text": "EENS",
+      "votes": 1000
+    }
+  },
+  {
+    "model": "polls.Choice",
+    "pk": 4,
+    "fields": {
+      "question": 2,
+      "choice_text": "Nothing",
+      "votes": 0
+    }
+  }
+]

@@ -1,0 +1,12 @@
+<p>
+    {{ input }}
+</p>
+
+<form action="/xss_upload/" enctype="multipart/form-data" method="post">
+
+    {% csrf_token %}
+
+    <input type="text" name="string">
+
+    <input type="submit" value="submit a string">
+</form>

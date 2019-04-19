@@ -1,0 +1,8 @@
+<form action="/xml_upload/" enctype="multipart/form-data" method="post">
+
+    {% csrf_token %}
+
+    <input type="file" name="xmlfile">
+
+    <input type="submit" value="upload xml file">
+</form>
