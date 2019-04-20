@@ -12,16 +12,16 @@ sudo chmod 0600 certs
 
 echo "Building and starting docker containers."
 echo "=================================================================================================="
-docker-compose build
+sudo docker-compose build
 
-docker-compose up -d
+sudo docker-compose up -d
 
-docker-compose exec web python manage.py migrate
-docker-compose exec web python manage.py shell -c "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('admin', 'admin', 'admin')"
-docker-compose exec web python manage.py loaddata initial_data
+sudo docker-compose exec web python manage.py migrate
+sudo docker-compose exec web python manage.py shell -c "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('admin', 'admin', 'admin')"
+sudo docker-compose exec web python manage.py loaddata initial_data
 
-docker-compose exec web-insecure python manage.py migrate
-docker-compose exec web-insecure python manage.py shell -c "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('admin', 'admin', 'admin')"
-docker-compose exec web-insecure python manage.py loaddata initial_data
+sudo docker-compose exec web-insecure python manage.py migrate
+sudo docker-compose exec web-insecure python manage.py shell -c "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('admin', 'admin', 'admin')"
+sudo docker-compose exec web-insecure python manage.py loaddata initial_data
 
-docker-compose logs -f
+sudo docker-compose logs -f
